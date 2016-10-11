@@ -1,14 +1,15 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import '../../../public/css/styles.css';
 
 import {ChatService, Message} from '../shared/services/chat.service';
 import {WebSocketService} from '../shared/services/websocket.service';
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
     selector: 'my-chat-app',
     templateUrl: `
         <main>
-            <h1>HyemChat</h1>
+            <h1>Hello {{username}}</h1>
             <div>
                 <input type="text" 
                        pInputText 
@@ -31,15 +32,24 @@ import {WebSocketService} from '../shared/services/websocket.service';
     providers: [WebSocketService, ChatService]
 })
 
-export class ChatAppComponent {
+export class ChatAppComponent implements OnInit {
 
     public messages : Message[] = [];
 
     public message : string = "";
 
-    constructor(private chatService: ChatService) {
+    private username : string;
+
+    constructor(private route : ActivatedRoute, private chatService: ChatService) {
         chatService.messages.subscribe(msg => {
             this.messages.push(msg);
+        });
+    }
+
+    ngOnInit() : void {
+        this.route.params.forEach((params: Params) => {
+            const username : string = params["username"];
+            this.username = username;
         });
     }
 

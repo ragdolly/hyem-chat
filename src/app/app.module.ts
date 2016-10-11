@@ -13,7 +13,7 @@ import {InputTextModule, ButtonModule} from 'primeng/primeng';
 
 const routes : Routes = [
     {path: "", component: LogInComponent},
-    {path: "chat", component: ChatAppComponent}
+    {path: "chat/:username", component: ChatAppComponent}
 ];
 
 @NgModule({

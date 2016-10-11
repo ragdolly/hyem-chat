@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import '../../../public/css/styles.css';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'log-in',
@@ -27,5 +28,13 @@ import '../../../public/css/styles.css';
 })
 
 export class LogInComponent {
-    username : string = "";
+    private username : string = "";
+
+    constructor(private router : Router) {
+
+    }
+
+    private onLogin() : void {
+        this.router.navigate(["./chat", this.username]);
+    }
 }
