@@ -6,6 +6,10 @@ main {
     display: block;
 }
 
+h1 {
+    color: black;
+}
+
 input {
     width: 300px;
     margin: 24px 0;
